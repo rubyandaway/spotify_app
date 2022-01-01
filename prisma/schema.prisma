@@ -25,10 +25,11 @@ model Song {
   createdAt  DateTime      @default(now())
   updatedAt  DateTime      @updatedAt
   name       String
-  Artist     Artist        @relation(fields: [artistId], references: [id])
+  artist     Artist        @relation(fields: [artistId], references: [id])
   artistId   Int
   Playlists  Playlist[]
-  duration   Int 
+  duration   Int
+  url        String 
       
 }
 

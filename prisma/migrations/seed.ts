@@ -6,23 +6,26 @@ const prisma = new PrismaClient()
 
 // Seed script
 const run = async () => {
-  await Promise.all(artistsData.map(async (artist) => {
+  await Promise.all(
+   artistsData.map(async (artist) => {
     return prisma.artist.upsert({
       where: { name: artist.name },
       update: {},
       create: {
         name: artist.name,
         songs: {
-          create: artist.songs.map(song => {
+          create: artist.songs.map(song => ({
             name: song.name,
             duration: song.duration,
-          }),
+            url: song.url
+
+          })),
 
         },
-        
       },
     })
-  }))
+  })
+ )
 }
 
 run()
